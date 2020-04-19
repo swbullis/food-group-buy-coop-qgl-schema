@@ -1,0 +1,89 @@
+type VendorItem @model {
+	ID: ID
+	Name: String
+	EstimatedPrice: Float
+	Splittable: Boolean
+	CaseQty: Float
+	Description: String
+	Location: String
+	Vendor: Vendor @connection(name: "VendorVendorItem")
+	VendorOrderItems: [VendorOrderItem] @connection(name: "VendorItemVendorOrderItems")
+    UPC: String
+	UnitType: UnitType @connection(name: "VendorUnitType")
+	SubItems: [VendorItem] @connection(name: "SubVendorItem")
+    ParentItem: VendorItem @connection(name: "SubVendorItem")
+    OrderItems: [OrderItem] @connection(name: "VendorItemOrderItems")
+ 	Image: String
+	LastUpdated: String
+}
+
+type Vendor @model {
+	ID: ID
+	Name: String
+	Phone: String
+	Address: String
+	Items: [VendorItem] @connection(name: "VendorVendorItem")
+    VendorOrders: [VendorOrder] @connection(name: "VendorVendorOrder")
+}
+
+type UnitType @model {
+	ID: ID
+	Name: String
+    Splittable: Boolean
+    VendorItems: [VendorItem] @connection(name: "VendorUnitType")
+}
+
+type Order @model {
+	ID: ID
+	Items: [OrderItem] @connection(name: "OrderOrderItems")
+	Member: Member @connection(name: "OrderMember")
+    VendorOrder: VendorOrder @connection(name: "VendorOrderOrders")
+	Price: String
+	Date: String
+	Processed: Boolean
+}
+
+type OrderItem @model {
+	ID: ID
+	Order: Order @connection(name: "OrderOrderItems")
+	VendorItem: VendorItem  @connection(name: "VendorItemOrderItems")
+	Minimum: Float
+	Maximum: Float
+}
+
+type Member @model {
+	ID: ID
+	Name: String
+	Phone: String
+	Address: String
+	Active: Boolean
+	Payments: [MemberPayments] @connection(name: "MemberMemberPayments")
+	Orders: [Order] @connection(name: "OrderMember")
+}
+
+type MemberPayments @model {
+	ID: ID
+	Date: String
+	Amount: String
+	TransactionFee: String
+	TransactionType: String
+	AdjustedAmount: String
+    Member: Member @connection(name: "MemberMemberPayments")
+}
+
+type VendorOrder @model {
+	ID: ID
+	Date: String
+	Vendor: Vendor @connection(name: "VendorVendorOrder")
+    Order: [Order] @connection(name: "VendorOrderOrders") 
+	VendorOrderItems: [VendorOrderItem] @connection(name: "VendorOrderVendorOrtderItems")
+}
+
+type VendorOrderItem @model {
+	ID: ID
+	Qty: Float
+	Item: VendorItem @connection(name: "VendorItemVendorOrderItems")
+	Price: Float
+	VendorOrder: VendorOrder @connection(name: "VendorOrderVendorOrtderItems")
+	Orders: [Order] @connection(name: "VendorOrderOrders")
+}

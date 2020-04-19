@@ -6,6 +6,10 @@ Created with GraphqlEditor.com
 
 https://app.graphqleditor.com/food-share/foodsharedata
 
+## Files
+* schema.graphql - GraphQLEditor.com formatted
+* aws-amplify-schema.graphql - Schema setup for AWS Amplify Use
+
 ## License
 
 [MIT](https://github.com/swbullis/food-group-buy-coop-qgl-schema/blob/master/LICENSE)
