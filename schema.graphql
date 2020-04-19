@@ -1,0 +1,81 @@
+type VendorItem{
+	ID: ID
+	Name: String
+	EstimatedPrice: Float
+	Splittable: Boolean
+	CaseQty: Float
+	Description: String
+	Location: String
+	Vendor: Vendor
+	UPC: String
+	UnitType: UnitType
+	SubItems: [VendorItem]
+	Image: String
+	LastUpdated: String
+}
+
+type Vendor{
+	ID: ID
+	Name: String
+	Phone: String
+	Address: String
+	Items: [VendorItem]
+}
+
+type UnitType{
+	ID: ID
+	Name: String
+	Splittable: Boolean
+}
+
+type Order{
+	ID: ID
+	Items: OrderItem
+	Member: Member
+	Price: String
+	Date: String
+	Processed: Boolean
+}
+
+type OrderItem{
+	ID: ID
+	Order: Order
+	VendorItem: VendorItem
+	Minimum: Float
+	Maximum: Float
+}
+
+type Member{
+	ID: ID
+	Name: String
+	Phone: String
+	Address: String
+	Active: Boolean
+	Payments: [MemberPayments]
+	Orders: [Order]
+}
+
+type MemberPayments{
+	ID: ID
+	Date: String
+	Amount: String
+	TransactionFee: String
+	TransactionType: String
+	AdjustedAmount: String
+}
+
+type VendorOrder{
+	ID: ID
+	Date: String
+	Vendor: Vendor
+	VendorOrderItems: [VendorOrderItem]
+}
+
+type VendorOrderItem{
+	ID: ID
+	Qty: Float
+	Item: VendorItem
+	Price: Float
+	VendorOrder: VendorOrder
+	Orders: [Order]
+}
