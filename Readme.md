@@ -6,3 +6,7 @@ Created with GraphqlEditor.com
 
 https://app.graphqleditor.com/food-share/foodsharedata
 
+## License
+
+[MIT](https://github.com/swbullis/food-group-buy-coop-qgl-schema/blob/master/LICENSE)
+
